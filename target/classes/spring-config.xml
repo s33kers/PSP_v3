@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context.xsd"
+
+       >
+
+    <context:annotation-config />
+
+    <!--Setter Injection-->
+    <bean id="setter" class="us.martink.imp.SetterImpl">
+        <property name="setterBean">
+            <ref bean="inner"/>
+        </property>
+    </bean>
+
+    <!--Constructor Injection-->
+    <bean id="construction" class="us.martink.imp.ConstructorImpl">
+        <constructor-arg>
+            <ref bean="inner"/>
+        </constructor-arg>
+    </bean>
+
+    <bean id="inner" class="us.martink.imp.InnerServiceImpl"/>
+
+    <!--Autowired-->
+    <bean id="autowiredService" class="us.martink.imp.AutowiredServiceImpl"/>
+
+    <!--Qualifier-->
+    <bean id="personBean1" class="us.martink.imp.QualifierServiceImpl" scope="prototype">
+        <property name="name" value="Antanas" />
+        <property name="age" value="28" />
+    </bean>
+
+    <bean id="personBean2" class="us.martink.imp.QualifierServiceImpl" scope="singleton">
+        <property name="name" value="Jonas" />
+        <property name="age" value="27" />
+    </bean>
+</beans>
